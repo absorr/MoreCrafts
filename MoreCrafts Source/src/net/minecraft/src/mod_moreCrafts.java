@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
+
 public class mod_moreCrafts extends BaseMod
 {
 	//Creates the configuration integers

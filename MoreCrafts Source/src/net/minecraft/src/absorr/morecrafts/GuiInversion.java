@@ -4,6 +4,7 @@ import net.minecraft.src.absorr.morecrafts.*;
 
 import org.lwjgl.opengl.GL11;
 
+
 public class GuiInversion extends GuiContainer
 {
     private TileEntityInversion invFurnaceInventory;

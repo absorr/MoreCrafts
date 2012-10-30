@@ -1,6 +1,8 @@
 package net.minecraft.src.absorr.morecrafts;
 
+
 import net.minecraft.src.*;
+import net.minecraft.src.absorr.morecrafts.EntityBlankEgg;
 
 public class EntityBlankEgg extends EntityThrowable
 {
