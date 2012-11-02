@@ -33,17 +33,17 @@ public class mod_moreCrafts extends BaseMod
     public static int configurationProperties()
     {
             configuration.load();
-            spawnerID = Integer.parseInt(configuration.getOrCreateIntProperty("Empty_Monster_Spawner", Configuration.CATEGORY_BLOCK, 191).value);
-            furnaceID = Integer.parseInt(configuration.getOrCreateIntProperty("Inversion_Furnace", Configuration.CATEGORY_BLOCK, 192).value);
-            chainID = Integer.parseInt(configuration.getOrCreateIntProperty("Chain", Configuration.CATEGORY_ITEM, 5978).value);
-            eggID = Integer.parseInt(configuration.getOrCreateIntProperty("Blank_Spawn_Egg", Configuration.CATEGORY_ITEM, 5979).value);
-            woodMultiID = Integer.parseInt(configuration.getOrCreateIntProperty("Wood_Multi_Tool", Configuration.CATEGORY_ITEM, 5989).value);
-            stoneMultiID = Integer.parseInt(configuration.getOrCreateIntProperty("Stone_Multi_Tool", Configuration.CATEGORY_ITEM, 5990).value);
-            ironMultiID = Integer.parseInt(configuration.getOrCreateIntProperty("Iron_Multi_Tool", Configuration.CATEGORY_ITEM, 5991).value);
-            diamondMultiID = Integer.parseInt(configuration.getOrCreateIntProperty("Diamond_Multi_Tool", Configuration.CATEGORY_ITEM, 5992).value);
-            goldMultiID = Integer.parseInt(configuration.getOrCreateIntProperty("Gold_Multi_Tool", Configuration.CATEGORY_ITEM, 5993).value);
-            advSpawnID = Integer.parseInt(configuration.getOrCreateIntProperty("Advanced_Spawn_Egg", Configuration.CATEGORY_ITEM, 6001).value);
-            eggMode = Integer.parseInt(configuration.getOrCreateIntProperty("Blank_Spawn_Egg_Mode", Configuration.CATEGORY_GENERAL, 1).value);
+            spawnerID = Integer.parseInt(configuration.getBlock("Empty_Monster_Spawner", Configuration.CATEGORY_BLOCK, 191).value);
+            furnaceID = Integer.parseInt(configuration.getBlock("Inversion_Furnace", Configuration.CATEGORY_BLOCK, 192).value);
+            chainID = Integer.parseInt(configuration.getItem("Chain", Configuration.CATEGORY_ITEM, 5978).value);
+            eggID = Integer.parseInt(configuration.getItem("Blank_Spawn_Egg", Configuration.CATEGORY_ITEM, 5979).value);
+            woodMultiID = Integer.parseInt(configuration.getItem("Wood_Multi_Tool", Configuration.CATEGORY_ITEM, 5989).value);
+            stoneMultiID = Integer.parseInt(configuration.getItem("Stone_Multi_Tool", Configuration.CATEGORY_ITEM, 5990).value);
+            ironMultiID = Integer.parseInt(configuration.getItem("Iron_Multi_Tool", Configuration.CATEGORY_ITEM, 5991).value);
+            diamondMultiID = Integer.parseInt(configuration.getItem("Diamond_Multi_Tool", Configuration.CATEGORY_ITEM, 5992).value);
+            goldMultiID = Integer.parseInt(configuration.getItem("Gold_Multi_Tool", Configuration.CATEGORY_ITEM, 5993).value);
+            advSpawnID = Integer.parseInt(configuration.getItem("Advanced_Spawn_Egg", Configuration.CATEGORY_ITEM, 6001).value);
+            eggMode = Integer.parseInt(configuration.get("Blank_Spawn_Egg_Mode", Configuration.CATEGORY_GENERAL, 1).value);
             configuration.save();
             propCheck();
             return spawnerID;
@@ -52,11 +52,11 @@ public class mod_moreCrafts extends BaseMod
 	//Creates the items and blocks
     public static final Item chain = new MoreItems(chainID, 64, CreativeTabs.tabMisc).setItemName("chain").setIconIndex(0);
     public static final Item blankEgg = new ItemBlankEgg(eggID).setItemName("blankEgg").setIconIndex(Item.monsterPlacer.iconIndex);
-    public static final Item woodMulti = new MoreItems(woodMultiID, 1, CreativeTabs.tabTools).setItemName("woodenMultitool").setIconIndex(11);
-    public static final Item stoneMulti = new MoreItems(stoneMultiID, 1, CreativeTabs.tabTools).setItemName("stoneMultitool").setIconIndex(10);
-    public static final Item ironMulti = new MoreItems(ironMultiID, 1, CreativeTabs.tabTools).setItemName("ironMultitool").setIconIndex(9);
-    public static final Item goldMulti = new MoreItems(goldMultiID, 1, CreativeTabs.tabTools).setItemName("goldMultitool").setIconIndex(12);
-    public static final Item diamondMulti = new MoreItems(diamondMultiID, 1, CreativeTabs.tabTools).setItemName("diamondMultitool").setIconIndex(13);
+    public static final Item woodMulti = new ItemMultiTool(woodMultiID, 1, EnumToolMaterial.WOOD).setItemName("woodenMultitool").setIconIndex(11);
+    public static final Item stoneMulti = new ItemMultiTool(stoneMultiID, 1, EnumToolMaterial.STONE).setItemName("stoneMultitool").setIconIndex(10);
+    public static final Item ironMulti = new ItemMultiTool(ironMultiID, 1, EnumToolMaterial.IRON).setItemName("ironMultitool").setIconIndex(9);
+    public static final Item goldMulti = new ItemMultiTool(goldMultiID, 1, EnumToolMaterial.GOLD).setItemName("goldMultitool").setIconIndex(12);
+    public static final Item diamondMulti = new ItemMultiTool(diamondMultiID, 1, EnumToolMaterial.EMERALD).setItemName("diamondMultitool").setIconIndex(13);
     public static final Item advSpawnEgg = new ItemAdvPlacer(advSpawnID).setItemName("advancedEgg").setIconIndex(Item.monsterPlacer.iconIndex);
     public static Block blankSpawner = new BlockBlankSpawner(spawnerID, 65).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Empty Monster Spawner"); 
     public static Block inverseFurnace = new BlockInversionFurnace(furnaceID, 0).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Inversion Furnace");
@@ -64,21 +64,7 @@ public class mod_moreCrafts extends BaseMod
     
     public void load()
     {
-    	MinecraftForge.setToolClass(woodMulti, "pickaxe", 2);
-    	MinecraftForge.setToolClass(woodMulti, "shovel", 2);
-    	MinecraftForge.setToolClass(woodMulti, "axe", 2);
-    	MinecraftForge.setToolClass(stoneMulti, "pickaxe", 2);
-    	MinecraftForge.setToolClass(stoneMulti, "shovel", 2);
-    	MinecraftForge.setToolClass(stoneMulti, "axe", 2);
-    	MinecraftForge.setToolClass(ironMulti, "pickaxe", 2);
-    	MinecraftForge.setToolClass(ironMulti, "shovel", 2);
-    	MinecraftForge.setToolClass(ironMulti, "axe", 2);
-    	MinecraftForge.setToolClass(goldMulti, "pickaxe", 2);
-    	MinecraftForge.setToolClass(goldMulti, "shovel", 2);
-    	MinecraftForge.setToolClass(goldMulti, "axe", 2);
-    	MinecraftForge.setToolClass(diamondMulti, "pickaxe", 2);
-    	MinecraftForge.setToolClass(diamondMulti, "shovel", 2);
-    	MinecraftForge.setToolClass(diamondMulti, "axe", 2);
+    	ItemAdvPlacer.loadDefaultIDs();
     	MinecraftForgeClient.preloadTexture("/morecrafts/items.png"); 
   		MinecraftForgeClient.preloadTexture("/morecrafts/blocks.png");
     	//MinecraftForge.setToolClass(pickaxeObsidian, "pickaxe", 3);

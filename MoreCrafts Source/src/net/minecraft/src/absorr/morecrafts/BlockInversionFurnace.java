@@ -16,7 +16,7 @@ public class BlockInversionFurnace extends BlockContainer
 	public BlockInversionFurnace(int i, int j) 
     { 
         super(i, j, Material.iron);
-        this.setCreativeTab(CreativeTabs.tabDeco);
+        this.setCreativeTab(CreativeTabs.tabDecorations);
     }
 	@Override
 	public String getTextureFile() 

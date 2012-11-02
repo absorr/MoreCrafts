@@ -1,6 +1,5 @@
 package net.minecraft.src.absorr.morecrafts;
 
-
 import net.minecraft.src.*;
 import net.minecraft.src.absorr.morecrafts.EntityBlankEgg;
 
@@ -26,14 +25,15 @@ public class EntityBlankEgg extends EntityThrowable
      */
     protected void onImpact(MovingObjectPosition par1MovingObjectPosition)
     {
-        if (par1MovingObjectPosition.entityHit instanceof EntityLiving && par1MovingObjectPosition.entityHit instanceof EntityPlayer == false)
+        if (par1MovingObjectPosition.entityHit instanceof EntityLiving && par1MovingObjectPosition.entityHit instanceof EntityPlayer == false && par1MovingObjectPosition.entityHit.isEntityAlive())
         {
             Entity entity = par1MovingObjectPosition.entityHit;
             int id = EntityList.getEntityID(entity);
-            if (entity instanceof EntityBlankEgg)
+            if (entity instanceof EntitySheep)
             {
             	EntitySheep sheep = (EntitySheep)entity;
             	int color = sheep.getFleeceColor();
+            	System.out.println("Sheep color " + color);
             	if (color == 0)
             		entity.entityDropItem(new ItemStack(Item.monsterPlacer, 1, id), 1);
             	else
@@ -43,6 +43,7 @@ public class EntityBlankEgg extends EntityThrowable
             	entity.entityDropItem(new ItemStack(Item.monsterPlacer, 1, id), 1);
             entity.setDead();
             this.worldObj.spawnParticle("largesmoke", par1MovingObjectPosition.hitVec.xCoord, par1MovingObjectPosition.hitVec.yCoord, par1MovingObjectPosition.hitVec.zCoord, 0.0D, 0.0D, 0.0D);
+            this.setDead();
         }
     }
     public static boolean spawnCreature(World par0World, int par1, double par2, double par4, double par6)

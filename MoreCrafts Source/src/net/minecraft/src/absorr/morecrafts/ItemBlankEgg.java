@@ -1,6 +1,5 @@
 package net.minecraft.src.absorr.morecrafts;
 
-
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 import net.minecraft.src.*;
@@ -12,7 +11,7 @@ public class ItemBlankEgg extends Item
     {
         super(par1);
         this.setHasSubtypes(true);
-        this.setTabToDisplayOn(CreativeTabs.tabMisc);
+        this.setCreativeTab(CreativeTabs.tabMisc);
     }
 
     @SideOnly(Side.CLIENT)
