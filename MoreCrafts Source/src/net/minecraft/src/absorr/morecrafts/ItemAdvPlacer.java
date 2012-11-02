@@ -4,6 +4,7 @@ import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 
 import java.util.*;
+
 import net.minecraft.src.*;
 
 public class ItemAdvPlacer extends Item
@@ -65,13 +66,26 @@ public class ItemAdvPlacer extends Item
         	return "Spawn Baby Wolf";
         if (var1 == 22)
         	return "Spawn Baby Ocelot";
+        if (var1 == 23)
+        	return "Spawn Baby Villager";
         else
         	return "Spawn Egg";
     }
     
-    public int getEntityID(int par1)
+    public static int getEntityID(int par1)
     {
     	return (Integer) advToEnt.get(par1);
+    }
+    
+    public static int getAdvID(int par1)
+    {
+    	Map rev = new HashMap();
+    	for (Object o : advToEnt.keySet()) 
+        {
+        	int x = (Integer) advToEnt.get(o);
+        	rev.put(x, o);
+        }
+    	return (Integer) rev.get(par1);
     }
     
     public static void addAdvID(int par1, int par2)
@@ -103,6 +117,7 @@ public class ItemAdvPlacer extends Item
     	addAdvID(20, 93); //Baby Chicken
     	addAdvID(21, 95); //Baby Wolf
     	addAdvID(22, 98); //Baby Ocelot
+    	addAdvID(23, 120); //Baby Villager
     }
 
     @SideOnly(Side.CLIENT)
@@ -173,6 +188,11 @@ public class ItemAdvPlacer extends Item
                     	EntitySheep sheep = (EntitySheep) var8;
                     	sheep.setFleeceColor(var7);
                     }
+                    else if (var8 instanceof EntityVillager)
+                    {
+                    	EntityVillager entity = (EntityVillager) var8;
+                    	entity.setGrowingAge(-24000);
+                    }
                     else
                     {
                     	EntityAnimal entity = (EntityAnimal) var8;
@@ -230,5 +250,6 @@ public class ItemAdvPlacer extends Item
     	par3List.add(new ItemStack(par1, 1, 20));
     	par3List.add(new ItemStack(par1, 1, 21));
     	par3List.add(new ItemStack(par1, 1, 22));
+    	par3List.add(new ItemStack(par1, 1, 23));
     }
 }
