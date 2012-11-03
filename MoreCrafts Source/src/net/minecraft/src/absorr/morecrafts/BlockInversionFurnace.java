@@ -1,14 +1,14 @@
 package net.minecraft.src.absorr.morecrafts;
+
 import net.minecraft.src.*;
 import net.minecraft.src.absorr.morecrafts.*;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
-
-
 import cpw.mods.fml.client.ITextureFX;
+import cpw.mods.fml.common.Side;
+import cpw.mods.fml.common.asm.SideOnly;
 import net.minecraftforge.*;
 
 public class BlockInversionFurnace extends BlockContainer
@@ -190,6 +190,8 @@ public class BlockInversionFurnace extends BlockContainer
                     return 4;
             }
     }
+    
+    @SideOnly(Side.CLIENT)
     public boolean blockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer)
     {
         if (par1World.isRemote)
