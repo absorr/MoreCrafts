@@ -68,6 +68,22 @@ public class ItemAdvPlacer extends Item
         	return "Spawn Baby Ocelot";
         if (var1 == 23)
         	return "Spawn Baby Villager";
+        if (var1 == 24)
+        	return "Spawn Farmer";
+        if (var1 == 25)
+        	return "Spawn Librarian";
+        if (var1 == 26)
+        	return "Spawn Priest";
+        if (var1 == 27)
+        	return "Spawn Blacksmith";
+        if (var1 == 28)
+        	return "Spawn Butcher";
+        if (var1 == 29)
+        	return "Spawn Generic Villager";
+        if (var1 == 30)
+        	return "Spawn Tamed Wolf";
+        if (var1 == 31)
+        	return "Spawn Tamed Ocelot";
         else
         	return "Spawn Egg";
     }
@@ -95,7 +111,7 @@ public class ItemAdvPlacer extends Item
     
     public static void loadDefaultIDs()
     {
-    	addAdvID(1, 91);
+    	addAdvID(1, 91); //Sheep Colors
     	addAdvID(2, 91);
     	addAdvID(3, 91);
     	addAdvID(4, 91);
@@ -118,6 +134,14 @@ public class ItemAdvPlacer extends Item
     	addAdvID(21, 95); //Baby Wolf
     	addAdvID(22, 98); //Baby Ocelot
     	addAdvID(23, 120); //Baby Villager
+    	addAdvID(24, 120); //Villager Occupations
+    	addAdvID(25, 120);
+    	addAdvID(26, 120);
+    	addAdvID(27, 120);
+    	addAdvID(28, 120);
+    	addAdvID(29, 120);
+    	addAdvID(30, 95); //Tamed Wolf
+    	addAdvID(31, 98); //Tamed Ocelot
     }
 
     @SideOnly(Side.CLIENT)
@@ -150,7 +174,7 @@ public class ItemAdvPlacer extends Item
                 var12 = 0.5D;
             }
 
-            if (spawnAdvCreature(par3World, getEntityID(par1ItemStack.getItemDamage()), (double)par4 + 0.5D, (double)par5 + var12, (double)par6 + 0.5D, par1ItemStack.getItemDamage()) != null && !par2EntityPlayer.capabilities.isCreativeMode)
+            if (spawnAdvCreature(par2EntityPlayer, par3World, getEntityID(par1ItemStack.getItemDamage()), (double)par4 + 0.5D, (double)par5 + var12, (double)par6 + 0.5D, par1ItemStack.getItemDamage()) != null && !par2EntityPlayer.capabilities.isCreativeMode)
             {
                 --par1ItemStack.stackSize;
             }
@@ -162,8 +186,9 @@ public class ItemAdvPlacer extends Item
     /**
      * Spawns the creature specified by the egg's type in the location specified by the last three parameters.
      * Parameters: world, entityID, x, y, z.
+     * @param player 
      */
-    public static Entity spawnAdvCreature(World var0, int var1, double var2, double var4, double var6, int var7)
+    public static Entity spawnAdvCreature(EntityPlayer player, World var0, int var1, double var2, double var4, double var6, int var7)
     {
         if (!EntityList.entityEggs.containsKey(Integer.valueOf(var1)))
         {
@@ -191,7 +216,33 @@ public class ItemAdvPlacer extends Item
                     else if (var8 instanceof EntityVillager)
                     {
                     	EntityVillager entity = (EntityVillager) var8;
-                    	entity.setGrowingAge(-24000);
+                    	if (var7 == 23)
+                    	{
+                    		entity.setGrowingAge(-24000);
+                    		return var8;
+                    	}
+                    	else
+                    	{
+                    		if (var7 == 24)
+                    			entity.setProfession(0);
+                    		if (var7 == 25)
+                    			entity.setProfession(1);
+                    		if (var7 == 26)
+                    			entity.setProfession(2);
+                    		if (var7 == 27)
+                    			entity.setProfession(3);
+                    		if (var7 == 28)
+                    			entity.setProfession(4);
+                    		if (var7 == 29)
+                    			entity.setProfession(6);
+                    	}
+                    }
+                    else if (var8 instanceof EntityTameable)
+                    {
+                    	EntityTameable entity = (EntityTameable) var8;
+                    	entity.setTamed(true);
+                    	entity.worldObj.setEntityState(entity, (byte)7);
+                    	entity.setOwner(player.username);
                     }
                     else
                     {
@@ -228,28 +279,9 @@ public class ItemAdvPlacer extends Item
      */
     public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List par3List)
     {
-    	par3List.add(new ItemStack(par1, 1, 1));
-    	par3List.add(new ItemStack(par1, 1, 2));
-    	par3List.add(new ItemStack(par1, 1, 3));
-    	par3List.add(new ItemStack(par1, 1, 4));
-    	par3List.add(new ItemStack(par1, 1, 5));
-    	par3List.add(new ItemStack(par1, 1, 6));
-    	par3List.add(new ItemStack(par1, 1, 7));
-    	par3List.add(new ItemStack(par1, 1, 8));
-    	par3List.add(new ItemStack(par1, 1, 9));
-    	par3List.add(new ItemStack(par1, 1, 10));
-    	par3List.add(new ItemStack(par1, 1, 11));
-    	par3List.add(new ItemStack(par1, 1, 12));
-    	par3List.add(new ItemStack(par1, 1, 13));
-    	par3List.add(new ItemStack(par1, 1, 14));
-    	par3List.add(new ItemStack(par1, 1, 15));
-    	par3List.add(new ItemStack(par1, 1, 16));
-    	par3List.add(new ItemStack(par1, 1, 17));
-    	par3List.add(new ItemStack(par1, 1, 18));
-    	par3List.add(new ItemStack(par1, 1, 19));
-    	par3List.add(new ItemStack(par1, 1, 20));
-    	par3List.add(new ItemStack(par1, 1, 21));
-    	par3List.add(new ItemStack(par1, 1, 22));
-    	par3List.add(new ItemStack(par1, 1, 23));
+    	for (Object o : advToEnt.keySet()) 
+        {
+    		par3List.add(new ItemStack(par1, 1, (Integer) o));
+        }
     }
 }
