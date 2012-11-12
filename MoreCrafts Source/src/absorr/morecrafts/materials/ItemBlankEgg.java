@@ -1,9 +1,9 @@
-package net.minecraft.src.absorr.morecrafts;
+package absorr.morecrafts.materials;
 
+import absorr.morecrafts.materials.EntityBlankEgg;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 import net.minecraft.src.*;
-import net.minecraft.src.absorr.morecrafts.EntityBlankEgg;
 
 public class ItemBlankEgg extends Item
 {

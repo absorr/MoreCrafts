@@ -1,8 +1,9 @@
-package net.minecraft.src.absorr.morecrafts;
+package absorr.morecrafts.materials;
 import net.minecraft.src.*;
-import net.minecraft.src.absorr.morecrafts.*;
 
 import org.lwjgl.opengl.GL11;
+
+import absorr.morecrafts.materials.*;
 
 
 public class GuiInversion extends GuiContainer

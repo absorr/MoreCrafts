@@ -1,4 +1,4 @@
-package net.minecraft.src.absorr.morecrafts;
+package absorr.morecrafts.materials;
 
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;

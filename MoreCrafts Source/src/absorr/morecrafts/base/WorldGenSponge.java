@@ -1,8 +1,9 @@
-package net.minecraft.src.absorr.morecrafts;
+package absorr.morecrafts.base;
 import net.minecraft.src.*;
-import net.minecraft.src.absorr.morecrafts.*;
 
 import java.util.Random;
+
+import absorr.morecrafts.materials.*;
 
 
 public class WorldGenSponge extends WorldGenerator

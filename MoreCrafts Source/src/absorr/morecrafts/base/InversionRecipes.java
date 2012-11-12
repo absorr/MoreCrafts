@@ -1,13 +1,14 @@
-package net.minecraft.src.absorr.morecrafts;
+package absorr.morecrafts.base;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import absorr.morecrafts.base.InversionRecipes;
+
 import net.minecraft.src.FurnaceRecipes;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.NBTTagCompound;
-import net.minecraft.src.absorr.morecrafts.InversionRecipes;
 
 public class InversionRecipes
 {

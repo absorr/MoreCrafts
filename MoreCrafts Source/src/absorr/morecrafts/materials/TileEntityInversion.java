@@ -1,8 +1,9 @@
-package net.minecraft.src.absorr.morecrafts;
+package absorr.morecrafts.materials;
 
+import absorr.morecrafts.base.InversionRecipes;
+import absorr.morecrafts.materials.*;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.src.*;
-import net.minecraft.src.absorr.morecrafts.*;
 import net.minecraftforge.common.*;
 
 public class TileEntityInversion extends TileEntity implements IInventory, ISidedInventory

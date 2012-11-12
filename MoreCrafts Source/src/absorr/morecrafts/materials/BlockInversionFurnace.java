@@ -1,11 +1,13 @@
-package net.minecraft.src.absorr.morecrafts;
+package absorr.morecrafts.materials;
 
 import net.minecraft.src.*;
-import net.minecraft.src.absorr.morecrafts.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+
+import absorr.morecrafts.base.CommonProxy;
+import absorr.morecrafts.materials.*;
 import cpw.mods.fml.client.ITextureFX;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
@@ -21,7 +23,7 @@ public class BlockInversionFurnace extends BlockContainer
 	@Override
 	public String getTextureFile() 
 	{
-		return "/morecrafts/blocks.png";
+		return CommonProxy.blockPic;
 	}
 	private static boolean keepFurnaceInventory = false;
 	public void onBlockAdded(World par1World, int par2, int par3, int par4)

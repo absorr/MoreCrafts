@@ -1,7 +1,7 @@
-package net.minecraft.src.absorr.morecrafts;
+package absorr.morecrafts.materials;
 
+import absorr.morecrafts.materials.*;
 import net.minecraft.src.*;
-import net.minecraft.src.absorr.morecrafts.*;
 
 public class ContainerInversion extends Container
 {

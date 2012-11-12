@@ -1,4 +1,4 @@
-package net.minecraft.src.absorr.morecrafts;
+package absorr.morecrafts.materials;
 import net.minecraft.src.*;
 
 import java.util.ArrayList;

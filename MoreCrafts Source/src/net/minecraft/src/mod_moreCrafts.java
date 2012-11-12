@@ -1,6 +1,5 @@
 package net.minecraft.src;
 
-import net.minecraft.src.absorr.morecrafts.*;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.*;
 import java.awt.List;
@@ -9,67 +8,58 @@ import java.lang.reflect.Array;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
+
+import absorr.morecrafts.base.*;
+import absorr.morecrafts.materials.*;
 import cpw.mods.fml.common.*;
+import cpw.mods.fml.common.Mod.*;
 import cpw.mods.fml.common.asm.*;
+import cpw.mods.fml.common.network.*;
 
-
+@Mod(modid="MoreCrafts", name="MoreCrafts", version="Build 017")
+@NetworkMod(clientSideRequired=true, serverSideRequired=false)
 public class mod_moreCrafts extends BaseMod
 {
-	//Creates the configuration integers from the config class
-	static int spawnerID = Config.spawnerID;
-	static int furnaceID = Config.furnaceID;
-    static int chainID = Config.chainID;
-    static int eggID = Config.eggID;
-    static int woodMultiID = Config.woodMultiID;
-    static int stoneMultiID = Config.stoneMultiID;
-    static int ironMultiID = Config.ironMultiID;
-    static int diamondMultiID = Config.diamondMultiID;
-    static int goldMultiID = Config.goldMultiID;
-    static int advSpawnID = Config.advSpawnID;
+	@SidedProxy(clientSide = "absorr.morecrafts.base.ClientProxy", serverSide = "absorr.morecrafts.base.CommonProxy", bukkitSide = "absorr.morecrafts.base.CommonProxy")
+	public static CommonProxy proxy;
+	
     static boolean vanRecipes = true;
     static boolean rechargeRs = true;
     static boolean otherStuff = true;
-    static int eggMode = Config.eggMode;
 	
 	//Creates the items and blocks
-    public static final Item chain = new MoreItems(chainID, 64, CreativeTabs.tabMisc).setItemName("chain").setIconIndex(0);
-    public static final Item blankEgg = new ItemBlankEgg(eggID).setItemName("blankEgg").setIconIndex(Item.monsterPlacer.iconIndex);
-    public static final Item woodMulti = new ItemMultiTool(woodMultiID, 1, EnumToolMaterial.WOOD).setItemName("woodenMultitool").setIconIndex(11);
-    public static final Item stoneMulti = new ItemMultiTool(stoneMultiID, 1, EnumToolMaterial.STONE).setItemName("stoneMultitool").setIconIndex(10);
-    public static final Item ironMulti = new ItemMultiTool(ironMultiID, 1, EnumToolMaterial.IRON).setItemName("ironMultitool").setIconIndex(9);
-    public static final Item goldMulti = new ItemMultiTool(goldMultiID, 1, EnumToolMaterial.GOLD).setItemName("goldMultitool").setIconIndex(12);
-    public static final Item diamondMulti = new ItemMultiTool(diamondMultiID, 1, EnumToolMaterial.EMERALD).setItemName("diamondMultitool").setIconIndex(13);
-    public static final Item advSpawnEgg = new ItemAdvPlacer(advSpawnID).setItemName("advancedEgg").setIconIndex(Item.monsterPlacer.iconIndex);
-    public static Block blankSpawner = new BlockBlankSpawner(spawnerID, 65).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Empty Monster Spawner"); 
-    public static Block inverseFurnace = new BlockInversionFurnace(furnaceID, 0).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Inversion Furnace");
+    public static final Item chain = new MoreItems(Config.chainID, 64, CreativeTabs.tabMisc).setItemName("chain").setIconIndex(0);
+    public static final Item blankEgg = new ItemBlankEgg(Config.eggID).setItemName("blankEgg").setIconIndex(Item.monsterPlacer.iconIndex);
+    public static final Item woodMulti = new ItemMultiTool(Config.woodMultiID, 1, EnumToolMaterial.WOOD).setItemName("woodenMultitool").setIconIndex(11);
+    public static final Item stoneMulti = new ItemMultiTool(Config.stoneMultiID, 1, EnumToolMaterial.STONE).setItemName("stoneMultitool").setIconIndex(10);
+    public static final Item ironMulti = new ItemMultiTool(Config.ironMultiID, 1, EnumToolMaterial.IRON).setItemName("ironMultitool").setIconIndex(9);
+    public static final Item goldMulti = new ItemMultiTool(Config.goldMultiID, 1, EnumToolMaterial.GOLD).setItemName("goldMultitool").setIconIndex(12);
+    public static final Item diamondMulti = new ItemMultiTool(Config.diamondMultiID, 1, EnumToolMaterial.EMERALD).setItemName("diamondMultitool").setIconIndex(13);
+    public static final Item advSpawnEgg = new ItemAdvPlacer(Config.advSpawnID).setItemName("advancedEgg").setIconIndex(Item.monsterPlacer.iconIndex);
+    public static Block blankSpawner = new BlockBlankSpawner(Config.spawnerID, 65).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Empty Monster Spawner"); 
+    public static Block inverseFurnace = new BlockInversionFurnace(Config.furnaceID, 0).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Inversion Furnace");
     
     public void load()
     {
-    	MinecraftForgeClient.preloadTexture("/morecrafts/items.png"); 
-    	MinecraftForgeClient.preloadTexture("/morecrafts/blocks.png");
+    	proxy.addMerchantRecipies();
+    	proxy.registerRenderers();
+    	
     	ItemAdvPlacer.loadDefaultIDs();
   		ModLoader.registerTileEntity(TileEntityInversion.class, "Inversion Furnace");
     	String maploaded = InversionRecipes.loader();
     	EntityList.entityEggs.put(Integer.valueOf(63), new EntityEggInfo(63, 0, 9118312));
-    	
-    	//Villager Trading "Recipes"
-    	MerchantRecipeList npcTrade = new MerchantRecipeList();
-    	npcTrade.addToListWithCheck(new MerchantRecipe (new ItemStack (Item.emerald, 4), new ItemStack (ironMulti, 1)));
-    	npcTrade.addToListWithCheck(new MerchantRecipe (new ItemStack (Item.emerald, 4), new ItemStack (blankEgg, 3)));
-    	npcTrade.addToListWithCheck(new MerchantRecipe (new ItemStack (blankEgg, 3), new ItemStack (Item.emerald, 1)));
-    	npcTrade.addToListWithCheck(new MerchantRecipe (new ItemStack (Item.emerald, 3), new ItemStack (blankSpawner, 1)));
     }
     
     public static void propCheck()
     {
-    	if (eggMode > 3 || eggMode < 1)
+    	if (Config.eggMode > 3 || Config.eggMode < 1)
         {
         	throw new Error("Configuration Property 'eggMode' must equil 1, 2, or 3");
         }
     }
     public static boolean eggUsable()
     {
-    	if (eggMode == 1 || eggMode == 3) return true;
+    	if (Config.eggMode == 1 || Config.eggMode == 3) return true;
     	else return false;
     }
     public boolean classExists (String className)
@@ -89,7 +79,7 @@ public class mod_moreCrafts extends BaseMod
     	//Vanilla Recipes
     	if (vanRecipes){
     		//Spawn Eggs
-    		if (eggMode == 2 || eggMode == 3)
+    		if (Config.eggMode == 2 || Config.eggMode == 3)
     		{
     			//Ocelot
                 ModLoader.addShapelessRecipe(new ItemStack(Item.monsterPlacer, 1, 98), new Object[] {blankEgg, Item.fishRaw,});
@@ -295,10 +285,6 @@ public class mod_moreCrafts extends BaseMod
     }
     public String getVersion()
     {
-        return "1.4 pre4";
-    }
-    public static String getModVersion()
-    {
-        return "1.4 pre4";
+        return "Build 017";
     }
 }
