@@ -41,54 +41,47 @@ public class MoreCrafts extends BaseMod
     static boolean otherStuff = true;
 	
 	//Creates the items and blocks
-    public static final Item chain = new MoreItems(Config.chainID, 64, CreativeTabs.tabMisc).setItemName("chain").setIconIndex(0);
-    public static final Item blankEgg = new ItemBlankEgg(Config.eggID).setItemName("blankEgg").setIconIndex(Item.monsterPlacer.getIconIndex(new ItemStack(Item.monsterPlacer)));
-    public static final Item woodMulti = new ItemMultiTool(Config.woodMultiID, 1, EnumToolMaterial.WOOD).setItemName("woodenMultitool").setIconIndex(11);
-    public static final Item stoneMulti = new ItemMultiTool(Config.stoneMultiID, 1, EnumToolMaterial.STONE).setItemName("stoneMultitool").setIconIndex(10);
-    public static final Item ironMulti = new ItemMultiTool(Config.ironMultiID, 1, EnumToolMaterial.IRON).setItemName("ironMultitool").setIconIndex(9);
-    public static final Item goldMulti = new ItemMultiTool(Config.goldMultiID, 1, EnumToolMaterial.GOLD).setItemName("goldMultitool").setIconIndex(12);
-    public static final Item diamondMulti = new ItemMultiTool(Config.diamondMultiID, 1, EnumToolMaterial.EMERALD).setItemName("diamondMultitool").setIconIndex(13);
-    public static final Item advSpawnEgg = new ItemAdvPlacer(Config.advSpawnID).setItemName("advancedEgg").setIconIndex(Item.monsterPlacer.getIconIndex(new ItemStack(Item.monsterPlacer)));
-    public static Block blankSpawner = new BlockBlankSpawner(Config.spawnerID, 65).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Empty Monster Spawner"); 
-    public static Block inverseFurnace = new BlockInversionFurnace(Config.furnaceID, 0).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Inversion Furnace");
+    public static Item chain;
+    public static Item blankEgg;
+    public static Item woodMulti;
+    public static Item stoneMulti;
+    public static Item ironMulti;
+    public static Item goldMulti;
+    public static Item diamondMulti;
+    public static Item advSpawnEgg;
+    public static Block blankSpawner; 
+    public static Block inverseFurnace;
     
     public void load()
     {
+    	//Loads the proxies
     	proxy.addMerchantRecipies();
     	proxy.registerRenderers();
     	
+    	//Loads the blocks and items
+    	chain = new MoreItems(Config.chainID, 64, CreativeTabs.tabMisc).setItemName("chain").setIconIndex(0);
+    	blankEgg = new ItemBlankEgg(Config.eggID).setItemName("blankEgg").setIconIndex(Item.monsterPlacer.getIconIndex(new ItemStack(Item.monsterPlacer)));
+    	woodMulti = new ItemMultiTool(Config.woodMultiID, 1, EnumToolMaterial.WOOD).setItemName("woodenMultitool").setIconIndex(11);
+    	woodMulti = new ItemMultiTool(Config.woodMultiID, 1, EnumToolMaterial.WOOD).setItemName("woodenMultitool").setIconIndex(11);
+        stoneMulti = new ItemMultiTool(Config.stoneMultiID, 1, EnumToolMaterial.STONE).setItemName("stoneMultitool").setIconIndex(10);
+        ironMulti = new ItemMultiTool(Config.ironMultiID, 1, EnumToolMaterial.IRON).setItemName("ironMultitool").setIconIndex(9);
+        goldMulti = new ItemMultiTool(Config.goldMultiID, 1, EnumToolMaterial.GOLD).setItemName("goldMultitool").setIconIndex(12);
+        diamondMulti = new ItemMultiTool(Config.diamondMultiID, 1, EnumToolMaterial.EMERALD).setItemName("diamondMultitool").setIconIndex(13);
+        advSpawnEgg = new ItemAdvPlacer(Config.advSpawnID).setItemName("advancedEgg").setIconIndex(Item.monsterPlacer.getIconIndex(new ItemStack(Item.monsterPlacer)));
+        blankSpawner = new BlockBlankSpawner(Config.spawnerID, 65).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Empty Monster Spawner"); 
+        inverseFurnace = new BlockInversionFurnace(Config.furnaceID, 0).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Inversion Furnace");
+    	
+        loadMaterials();
+        
+        //Other junk
     	ItemAdvPlacer.loadDefaultIDs();
   		ModLoader.registerTileEntity(TileEntityInversion.class, "Inversion Furnace");
     	String maploaded = InversionRecipes.loader();
     	EntityList.entityEggs.put(Integer.valueOf(63), new EntityEggInfo(63, 0, 9118312));
     }
     
-    public static void propCheck()
+    private void loadMaterials()
     {
-    	if (Config.eggMode > 3 || Config.eggMode < 1)
-        {
-        	throw new Error("Configuration Property 'eggMode' must equil 1, 2, or 3");
-        }
-    }
-    public static boolean eggUsable()
-    {
-    	if (Config.eggMode == 1 || Config.eggMode == 3) return true;
-    	else return false;
-    }
-    public boolean classExists (String className)
-    {
-    	try {
-    		Class.forName (className);
-    		return true;
-    	}
-    	catch (ClassNotFoundException exception) {
-    		return false;
-    	}
-    }
-    public MoreCrafts()
-    {
-    	//ModLoader.getMinecraftInstance().thePlayer.addChatMessage("MoreCrafts Development Build Loaded Succesfully");
-    	
     	//Vanilla Recipes
     	if (vanRecipes){
     		//Spawn Eggs
@@ -168,31 +161,6 @@ public class MoreCrafts extends BaseMod
             ModLoader.addRecipe(new ItemStack(Item.bootsChain, 1), new Object[]{
                 "000", "L0L", "L0L", 
                 'L', chain});
-            //Ore Recipes replaced by Inversion Furnace
-            /** //Iron Ore
-            ModLoader.addRecipe(new ItemStack(Block.oreIron, 1), new Object[]{
-                "SSS", "SIS", "SSS", 
-                'S', Block.stone, 'I', Item.ingotIron});
-            //Coal Ore
-            ModLoader.addRecipe(new ItemStack(Block.oreCoal, 1), new Object[]{
-                "SSS", "SIS", "SSS", 
-                'S', Block.stone, 'I', Item.coal});
-            //Gold Ore
-            ModLoader.addRecipe(new ItemStack(Block.oreGold, 1), new Object[]{
-                "SSS", "SIS", "SSS", 
-                'S', Block.stone, 'I', Item.ingotGold});
-            //Diamond Ore
-            ModLoader.addRecipe(new ItemStack(Block.oreDiamond, 1), new Object[]{
-                "SSS", "SIS", "SSS", 
-                'S', Block.stone, 'I', Item.diamond});
-            //Redstone Ore
-            ModLoader.addRecipe(new ItemStack(Block.oreRedstone, 1), new Object[]{
-                "SIS", "ISI", "SIS", 
-                'S', Block.stone, 'I', Item.redstone});
-            //Lapis Lazuli Ore
-            ModLoader.addRecipe(new ItemStack(Block.oreLapis, 1), new Object[]{
-                "SIS", "ISI", "SIS", 
-                'S', Block.stone, 'I', new ItemStack(Item.dyePowder, 1, 4)}); **/
             //Broken Stone Bricks
             ModLoader.addSmelting(Block.stoneBrick.blockID, new ItemStack(Block.stoneBrick, 1, 2));
             //Dragon Egg
@@ -217,8 +185,7 @@ public class MoreCrafts extends BaseMod
             //End Stone
             ModLoader.addRecipe(new ItemStack(Block.whiteStone, 1), new Object[] {"SCS", "CIC", "SCS", 'S', Block.sponge, 'C', Block.cobblestone, 'I', Block.blockSteel});
     	}
-        
-        //Wooden Multi-Tool
+    	//Wooden Multi-Tool
         ModLoader.addName(woodMulti, "Wooden Multi-Tool");
         ModLoader.addRecipe(new ItemStack(woodMulti, 1), new Object[] {"AHP", "OSO", "OSO", 'S', Item.stick, 'A', Item.axeWood, 'H', Item.shovelWood, 'P', Item.pickaxeWood});
         //Stone Multi-Tool
@@ -246,41 +213,43 @@ public class MoreCrafts extends BaseMod
             ModLoader.addName(inverseFurnace, "Inversion Furnace");
             ModLoader.addRecipe(new ItemStack(inverseFurnace, 1), new Object[] {"DED", "EFE", "DED", 'E', Block.whiteStone, 'D', Item.diamond, 'F', Block.stoneOvenIdle});
         }
-        //Insta-Smelt
-    	/**ModLoader.addName(instaSmelt, "Insta-Smelt");
-    	if(classExists("mod_IC2"))
-    	{
-    		ModLoader.addShapelessRecipe(new ItemStack(instaSmelt, 16), new Object[] {Block.stoneOvenIdle, Items.getItem("electronicCircuit")});
-    		ModLoader.addShapelessRecipe(new ItemStack(instaSmelt, 36), new Object[] {Block.stoneOvenIdle, Items.getItem("advancedCircuit")});
-    	}
-    	else ModLoader.addRecipe(new ItemStack(instaSmelt, 26), new Object[] {"RGR", "IFI", "RGR", 'F', Block.stoneOvenIdle, 'I', Item.ingotIron, 'R', Item.redstone, 'G', Item.ingotGold});
-        instaRecipes(); **/
-        
         //Adds Items to Dungeon Loot
         DungeonHooks.addDungeonLoot(new ItemStack(chain), 1, 1, 8);
         DungeonHooks.addDungeonLoot(new ItemStack(woodMulti), (int) 0.65, 1, 8);
         DungeonHooks.addDungeonLoot(new ItemStack(blankEgg), (int) 0.1, 1, 8);
         DungeonHooks.addDungeonLoot(new ItemStack(Block.sponge), (int) 3.6, 1, 8);
     }
-    /**private void instaRecipes()
+    
+    public static void propCheck()
     {
-    	//Smelting
-    	Map smeltMap = FurnaceRecipes.smelting().getSmeltingList();
-    	for (Object o : smeltMap.keySet()) 
+    	if (Config.eggMode > 3 || Config.eggMode < 1)
         {
-        	ItemStack x = (ItemStack) smeltMap.get(o);
-        	ItemStack y = new ItemStack((Integer) o, 1, 0);
-        	ModLoader.addShapelessRecipe(x, new Object[] {instaSmelt, y.getItem()});
+        	throw new Error("Configuration Property 'eggMode' must equil 1, 2, or 3");
         }
-    	if(classExists("mod_IC2"))
-    	{
-        	//Compressing
-        	java.util.List<Entry<ItemStack, ItemStack>> compMap = Ic2Recipes.getCompressorRecipes();
-        	int p = compMap.size();
-        	int[] e = new int[p];
-        	System.out.println(e);
+    }
+    
+    public static boolean eggUsable()
+    {
+    	if (Config.eggMode == 1 || Config.eggMode == 3) return true;
+    	else return false;
+    }
+    
+    public boolean classExists (String className)
+    {
+    	try {
+    		Class.forName (className);
+    		return true;
     	}
-    }**/
+    	catch (ClassNotFoundException exception) {
+    		return false;
+    	}
+    }
+    
+    public MoreCrafts()
+    {
+    	
+    }
+    
     public void generateSurface(World world, Random random, int chunkX, int chunkZ)
     {
     	//test generation using seed -839019905251343089
