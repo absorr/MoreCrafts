@@ -1,5 +1,6 @@
 package absorr.morecrafts.materials;
 
+import absorr.morecrafts.base.MoreCrafts;
 import absorr.morecrafts.materials.EntityBlankEgg;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
@@ -43,7 +44,7 @@ public class ItemBlankEgg extends Item
      */
     public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) 
     {
-        if (entity instanceof EntityLiving && mod_moreCrafts.eggUsable() && entity instanceof EntityPlayer == false)
+        if (entity instanceof EntityLiving && MoreCrafts.eggUsable() && entity instanceof EntityPlayer == false)
         {
         	int id = EntityList.getEntityID(entity);
         	player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Item.monsterPlacer, 1, id));
@@ -55,7 +56,7 @@ public class ItemBlankEgg extends Item
     
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
     {
-    	if (mod_moreCrafts.eggUsable())
+    	if (MoreCrafts.eggUsable())
     	{
     		if (!par3EntityPlayer.capabilities.isCreativeMode)
             {

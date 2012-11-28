@@ -1,5 +1,18 @@
-package net.minecraft.src;
+package absorr.morecrafts.base;
 
+import net.minecraft.src.BaseMod;
+import net.minecraft.src.BiomeGenBase;
+import net.minecraft.src.BiomeGenOcean;
+import net.minecraft.src.BiomeGenRiver;
+import net.minecraft.src.Block;
+import net.minecraft.src.CreativeTabs;
+import net.minecraft.src.EntityEggInfo;
+import net.minecraft.src.EntityList;
+import net.minecraft.src.EnumToolMaterial;
+import net.minecraft.src.Item;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.ModLoader;
+import net.minecraft.src.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.*;
 import java.awt.List;
@@ -18,7 +31,7 @@ import cpw.mods.fml.common.network.*;
 
 @Mod(modid="MoreCrafts", name="MoreCrafts", version="Build 017")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
-public class mod_moreCrafts extends BaseMod
+public class MoreCrafts extends BaseMod
 {
 	@SidedProxy(clientSide = "absorr.morecrafts.base.ClientProxy", serverSide = "absorr.morecrafts.base.CommonProxy", bukkitSide = "absorr.morecrafts.base.CommonProxy")
 	public static CommonProxy proxy;
@@ -29,13 +42,13 @@ public class mod_moreCrafts extends BaseMod
 	
 	//Creates the items and blocks
     public static final Item chain = new MoreItems(Config.chainID, 64, CreativeTabs.tabMisc).setItemName("chain").setIconIndex(0);
-    public static final Item blankEgg = new ItemBlankEgg(Config.eggID).setItemName("blankEgg").setIconIndex(Item.monsterPlacer.iconIndex);
+    public static final Item blankEgg = new ItemBlankEgg(Config.eggID).setItemName("blankEgg").setIconIndex(Item.monsterPlacer.getIconIndex(new ItemStack(Item.monsterPlacer)));
     public static final Item woodMulti = new ItemMultiTool(Config.woodMultiID, 1, EnumToolMaterial.WOOD).setItemName("woodenMultitool").setIconIndex(11);
     public static final Item stoneMulti = new ItemMultiTool(Config.stoneMultiID, 1, EnumToolMaterial.STONE).setItemName("stoneMultitool").setIconIndex(10);
     public static final Item ironMulti = new ItemMultiTool(Config.ironMultiID, 1, EnumToolMaterial.IRON).setItemName("ironMultitool").setIconIndex(9);
     public static final Item goldMulti = new ItemMultiTool(Config.goldMultiID, 1, EnumToolMaterial.GOLD).setItemName("goldMultitool").setIconIndex(12);
     public static final Item diamondMulti = new ItemMultiTool(Config.diamondMultiID, 1, EnumToolMaterial.EMERALD).setItemName("diamondMultitool").setIconIndex(13);
-    public static final Item advSpawnEgg = new ItemAdvPlacer(Config.advSpawnID).setItemName("advancedEgg").setIconIndex(Item.monsterPlacer.iconIndex);
+    public static final Item advSpawnEgg = new ItemAdvPlacer(Config.advSpawnID).setItemName("advancedEgg").setIconIndex(Item.monsterPlacer.getIconIndex(new ItemStack(Item.monsterPlacer)));
     public static Block blankSpawner = new BlockBlankSpawner(Config.spawnerID, 65).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Empty Monster Spawner"); 
     public static Block inverseFurnace = new BlockInversionFurnace(Config.furnaceID, 0).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Inversion Furnace");
     
@@ -72,7 +85,7 @@ public class mod_moreCrafts extends BaseMod
     		return false;
     	}
     }
-    public mod_moreCrafts()
+    public MoreCrafts()
     {
     	//ModLoader.getMinecraftInstance().thePlayer.addChatMessage("MoreCrafts Development Build Loaded Succesfully");
     	

@@ -3,7 +3,6 @@ package absorr.morecrafts.base;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import java.io.File;
-import net.minecraft.src.mod_moreCrafts;
 
 public class Config 
 {

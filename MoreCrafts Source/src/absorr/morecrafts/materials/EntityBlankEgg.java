@@ -1,5 +1,6 @@
 package absorr.morecrafts.materials;
 
+import absorr.morecrafts.base.MoreCrafts;
 import absorr.morecrafts.materials.EntityBlankEgg;
 import net.minecraft.src.*;
 
@@ -38,27 +39,27 @@ public class EntityBlankEgg extends EntityThrowable
             	if (color == 0)
             		entity.entityDropItem(new ItemStack(Item.monsterPlacer, 1, id), 1);
             	else
-            		entity.entityDropItem(new ItemStack(mod_moreCrafts.advSpawnEgg, 1, color), 1);
+            		entity.entityDropItem(new ItemStack(MoreCrafts.advSpawnEgg, 1, color), 1);
             }
             else if (living.isChild())
             {
             	int advID = ItemAdvPlacer.getAdvID(id);
             	if ((Integer)advID != null)
-            		entity.entityDropItem(new ItemStack(mod_moreCrafts.advSpawnEgg, 1, advID), 1);
+            		entity.entityDropItem(new ItemStack(MoreCrafts.advSpawnEgg, 1, advID), 1);
             	else
             		entity.entityDropItem(new ItemStack(Item.monsterPlacer, 1, id), 1);
             }
             else if (entity instanceof EntityVillager && !living.isChild())
             {
             	EntityVillager npc = (EntityVillager) living;
-            	entity.entityDropItem(new ItemStack(mod_moreCrafts.advSpawnEgg, 1, npc.getProfession() + 24), 1);
+            	entity.entityDropItem(new ItemStack(MoreCrafts.advSpawnEgg, 1, npc.getProfession() + 24), 1);
             }
             else if (entity instanceof EntityTameable && !living.isChild())
             {
             	if (id == 95)
-            		entity.entityDropItem(new ItemStack(mod_moreCrafts.advSpawnEgg, 1, 30), 1);
+            		entity.entityDropItem(new ItemStack(MoreCrafts.advSpawnEgg, 1, 30), 1);
             	if (id == 98)
-            		entity.entityDropItem(new ItemStack(mod_moreCrafts.advSpawnEgg, 1, 31), 1);
+            		entity.entityDropItem(new ItemStack(MoreCrafts.advSpawnEgg, 1, 31), 1);
             }
             else
             	entity.entityDropItem(new ItemStack(Item.monsterPlacer, 1, id), 1);

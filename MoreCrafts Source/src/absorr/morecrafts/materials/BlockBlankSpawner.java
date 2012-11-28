@@ -4,6 +4,8 @@ import net.minecraft.src.*;
 import java.util.ArrayList;
 import java.util.Random;
 
+import absorr.morecrafts.base.MoreCrafts;
+
 import net.minecraftforge.*;
 
 public class BlockBlankSpawner extends Block
@@ -29,7 +31,7 @@ public class BlockBlankSpawner extends Block
         		String mob = EntityList.getStringFromID(meta);
         		world.setBlockAndMetadataWithNotify(x, y, z, Block.mobSpawner.blockID, meta);
         		((TileEntityMobSpawner)world.getBlockTileEntity(x, y, z)).setMobID(mob);
-        		player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(mod_moreCrafts.blankEgg));
+        		player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(MoreCrafts.blankEgg));
         		return true;
         	}else
         		return false;
@@ -90,7 +92,7 @@ public class BlockBlankSpawner extends Block
     {
     	ItemStack heldItem = ModLoader.getMinecraftInstance().thePlayer.inventory.getCurrentItem();
     	int meta = heldItem.getItemDamage();
-    	par1World.setBlockAndMetadataWithNotify(par2, par3, par4, mod_moreCrafts.blankSpawner.blockID, meta);
+    	par1World.setBlockAndMetadataWithNotify(par2, par3, par4, MoreCrafts.blankSpawner.blockID, meta);
     	if (meta == 1)
     	{
     		par1World.markBlocksDirty(par2, par3, par4, par2, par3, par4);
@@ -138,6 +140,6 @@ public class BlockBlankSpawner extends Block
     public void addCreativeItems(ArrayList itemList)
     {
             itemList.add(new ItemStack(this));
-            itemList.add(new ItemStack(mod_moreCrafts.blankSpawner, 1, 1));
+            itemList.add(new ItemStack(MoreCrafts.blankSpawner, 1, 1));
     }
 }

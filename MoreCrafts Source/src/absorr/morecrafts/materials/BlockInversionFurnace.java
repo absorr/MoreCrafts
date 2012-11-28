@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Random;
 
 import absorr.morecrafts.base.CommonProxy;
+import absorr.morecrafts.base.MoreCrafts;
 import absorr.morecrafts.materials.*;
 import cpw.mods.fml.client.ITextureFX;
 import cpw.mods.fml.common.Side;
@@ -215,14 +216,14 @@ public class BlockInversionFurnace extends BlockContainer
         {
         	if (meta < 10)
         	{
-        		world.setBlockAndMetadataWithNotify(x, y, z, mod_moreCrafts.inverseFurnace.blockID, meta + 10);
+        		world.setBlockAndMetadataWithNotify(x, y, z, MoreCrafts.inverseFurnace.blockID, meta + 10);
         	}
         }
         else
         {
         	if (meta > 10)
         	{
-        		world.setBlockAndMetadataWithNotify(x, y, z, mod_moreCrafts.inverseFurnace.blockID, meta - 10);
+        		world.setBlockAndMetadataWithNotify(x, y, z, MoreCrafts.inverseFurnace.blockID, meta - 10);
         	}
         }
 
