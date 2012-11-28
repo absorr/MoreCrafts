@@ -343,7 +343,7 @@ public class TileEntityInversion extends TileEntity implements IInventory, ISide
                     return 300;
                 }
             }
-            if (var2 instanceof ItemTool && ((ItemTool) var2).func_77861_e().equals("WOOD")) return 200;
+            if (var2 instanceof ItemTool && ((ItemTool) var2).getToolMaterialName().equals("WOOD")) return 200;
             if (var2 instanceof ItemSword && ((ItemSword) var2).func_77825_f().equals("WOOD")) return 200;
             if (var2 instanceof ItemHoe && ((ItemHoe) var2).func_77842_f().equals("WOOD")) return 200;
             if (var1 == Item.stick.shiftedIndex) return 100;

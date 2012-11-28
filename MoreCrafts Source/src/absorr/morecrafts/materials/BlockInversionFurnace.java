@@ -193,23 +193,17 @@ public class BlockInversionFurnace extends BlockContainer
             }
     }
     
+    @Override
     @SideOnly(Side.CLIENT)
-    public boolean blockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer)
+    public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
     {
-        if (par1World.isRemote)
+    	TileEntityInversion var6 = (TileEntityInversion)par1World.getBlockTileEntity(par2, par3, par4);
+        if (var6 != null)
         {
-            return true;
+            ModLoader.openGUI(par5EntityPlayer, new GuiInversion(par5EntityPlayer.inventory, var6));
         }
-        else
-        {
-            TileEntityInversion var6 = (TileEntityInversion)par1World.getBlockTileEntity(par2, par3, par4);
-            if (var6 != null)
-            {
-                ModLoader.openGUI(ModLoader.getMinecraftInstance().thePlayer, new GuiInversion(ModLoader.getMinecraftInstance().thePlayer.inventory, var6));
-            }
 
-            return true;
-        }
+        return true;
     }
     public static void updateFurnaceBlockState(boolean par0, World world, int x, int y, int z)
     {

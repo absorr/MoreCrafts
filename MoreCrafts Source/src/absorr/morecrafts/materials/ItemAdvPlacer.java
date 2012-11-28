@@ -205,7 +205,7 @@ public class ItemAdvPlacer extends Item
                 if (var8 != null)
                 {
                     var8.setLocationAndAngles(var2, var4, var6, var0.rand.nextFloat() * 360.0F, 0.0F);
-                    ((EntityLiving)var8).func_82163_bD();
+                    ((EntityLiving)var8).initCreature();
                     var0.spawnEntityInWorld(var8);
                     ((EntityLiving)var8).playLivingSound();
                     if (var7 < 15 && var8 instanceof EntitySheep)
