@@ -1,33 +1,33 @@
 package absorr.morecrafts.base;
 
-import net.minecraft.src.BaseMod;
-import net.minecraft.src.BiomeGenBase;
-import net.minecraft.src.BiomeGenOcean;
-import net.minecraft.src.BiomeGenRiver;
-import net.minecraft.src.Block;
-import net.minecraft.src.CreativeTabs;
-import net.minecraft.src.EntityEggInfo;
-import net.minecraft.src.EntityList;
-import net.minecraft.src.EnumToolMaterial;
-import net.minecraft.src.Item;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.ModLoader;
-import net.minecraft.src.World;
-import net.minecraftforge.client.MinecraftForgeClient;
-import net.minecraftforge.common.*;
-import java.awt.List;
-import java.io.File;
-import java.lang.reflect.Array;
-import java.util.Map;
-import java.util.Map.Entry;
+import ic2.api.Ic2Recipes;
+
 import java.util.Random;
 
-import absorr.morecrafts.base.*;
-import absorr.morecrafts.materials.*;
-import cpw.mods.fml.common.*;
-import cpw.mods.fml.common.Mod.*;
-import cpw.mods.fml.common.asm.*;
-import cpw.mods.fml.common.network.*;
+import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityEggInfo;
+import net.minecraft.entity.EntityList;
+import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.src.BaseMod;
+import net.minecraft.src.ModLoader;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.BiomeGenOcean;
+import net.minecraft.world.biome.BiomeGenRiver;
+import net.minecraftforge.common.DungeonHooks;
+import absorr.morecrafts.materials.BlockBlankSpawner;
+import absorr.morecrafts.materials.BlockInversionFurnace;
+import absorr.morecrafts.materials.ItemAdvPlacer;
+import absorr.morecrafts.materials.ItemBlankEgg;
+import absorr.morecrafts.materials.ItemMultiTool;
+import absorr.morecrafts.materials.MoreItems;
+import absorr.morecrafts.materials.TileEntityInversion;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.network.NetworkMod;
 
 @Mod(modid="MoreCrafts", name="MoreCrafts", version="Build 017")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
@@ -184,6 +184,7 @@ public class MoreCrafts extends BaseMod
             ModLoader.addRecipe(new ItemStack(Block.endPortalFrame, 1), new Object[] {"LEL", "EOE", "EEE", 'E', Block.whiteStone, 'O', Block.obsidian, 'L', Block.blockLapis});
             //End Stone
             ModLoader.addRecipe(new ItemStack(Block.whiteStone, 1), new Object[] {"SCS", "CIC", "SCS", 'S', Block.sponge, 'C', Block.cobblestone, 'I', Block.blockSteel});
+            Ic2Recipes.addCompressorRecipe(new ItemStack(Block.sponge, 4), new ItemStack(Block.whiteStone));
     	}
     	//Wooden Multi-Tool
         ModLoader.addName(woodMulti, "Wooden Multi-Tool");

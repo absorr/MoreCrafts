@@ -1,8 +1,18 @@
 package absorr.morecrafts.materials;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.entity.passive.EntityTameable;
+import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityThrowable;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.World;
 import absorr.morecrafts.base.MoreCrafts;
-import absorr.morecrafts.materials.EntityBlankEgg;
-import net.minecraft.src.*;
 
 public class EntityBlankEgg extends EntityThrowable
 {

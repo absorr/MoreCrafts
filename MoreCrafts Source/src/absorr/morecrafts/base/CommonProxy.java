@@ -1,6 +1,9 @@
 package absorr.morecrafts.base;
 
-import net.minecraft.src.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.village.MerchantRecipe;
+import net.minecraft.village.MerchantRecipeList;
 
 public class CommonProxy
 {

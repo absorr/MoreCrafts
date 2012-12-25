@@ -1,7 +1,14 @@
 package absorr.morecrafts.materials;
 
-import absorr.morecrafts.materials.*;
-import net.minecraft.src.*;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.SlotFurnace;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.tileentity.TileEntityFurnace;
 
 public class ContainerInversion extends Container
 {
@@ -45,17 +52,17 @@ public class ContainerInversion extends Container
 
             if (this.lastCookTime != this.furnace.invFurnaceCookTime)
             {
-                var2.updateCraftingInventoryInfo(this, 0, this.furnace.invFurnaceCookTime);
+                var2.sendProgressBarUpdate(this, 0, this.furnace.invFurnaceCookTime);
             }
 
             if (this.lastBurnTime != this.furnace.invFurnaceBurnTime)
             {
-                var2.updateCraftingInventoryInfo(this, 1, this.furnace.invFurnaceBurnTime);
+                var2.sendProgressBarUpdate(this, 1, this.furnace.invFurnaceBurnTime);
             }
 
             if (this.lastItemBurnTime != this.furnace.currentItemBurnTime)
             {
-                var2.updateCraftingInventoryInfo(this, 2, this.furnace.currentItemBurnTime);
+                var2.sendProgressBarUpdate(this, 2, this.furnace.currentItemBurnTime);
             }
         }
 

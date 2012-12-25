@@ -1,18 +1,21 @@
 package absorr.morecrafts.materials;
 
-import net.minecraft.src.*;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
+import net.minecraft.src.ModLoader;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
 import absorr.morecrafts.base.CommonProxy;
 import absorr.morecrafts.base.MoreCrafts;
-import absorr.morecrafts.materials.*;
-import cpw.mods.fml.client.ITextureFX;
-import cpw.mods.fml.common.Side;
-import cpw.mods.fml.common.asm.SideOnly;
-import net.minecraftforge.*;
 
 public class BlockInversionFurnace extends BlockContainer
 {
@@ -195,13 +198,19 @@ public class BlockInversionFurnace extends BlockContainer
     }
     
     @Override
-    @SideOnly(Side.CLIENT)
     public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
     {
     	TileEntityInversion var6 = (TileEntityInversion)par1World.getBlockTileEntity(par2, par3, par4);
         if (var6 != null)
         {
-            ModLoader.openGUI(par5EntityPlayer, new GuiInversion(par5EntityPlayer.inventory, var6));
+        	if(par5EntityPlayer instanceof EntityPlayerMP)
+            {
+        		ModLoader.serverOpenWindow((EntityPlayerMP)par5EntityPlayer, new ContainerInversion(par5EntityPlayer.inventory,var6), 0, par2, par3, par4);
+            }
+            else
+            {
+            	ModLoader.openGUI(par5EntityPlayer, new GuiInversion(par5EntityPlayer.inventory, var6));
+            }
         }
 
         return true;

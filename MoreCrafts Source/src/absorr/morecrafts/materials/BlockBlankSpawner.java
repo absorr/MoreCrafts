@@ -1,13 +1,17 @@
 package absorr.morecrafts.materials;
-import net.minecraft.src.*;
-
 import java.util.ArrayList;
-import java.util.Random;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityList;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntityMobSpawner;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import absorr.morecrafts.base.MoreCrafts;
-
-import net.minecraftforge.*;
-
 public class BlockBlankSpawner extends Block
 {
 	public BlockBlankSpawner(int i, int j) 
@@ -88,39 +92,11 @@ public class BlockBlankSpawner extends Block
     	if (par1 == 1) return 8388608;
     	else return 16777215;
     }
-    public void onBlockPlaced(World par1World, int par2, int par3, int par4, int par5) 
-    {
-    	ItemStack heldItem = ModLoader.getMinecraftInstance().thePlayer.inventory.getCurrentItem();
-    	int meta = heldItem.getItemDamage();
-    	par1World.setBlockAndMetadataWithNotify(par2, par3, par4, MoreCrafts.blankSpawner.blockID, meta);
-    	if (meta == 1)
-    	{
-    		par1World.markBlocksDirty(par2, par3, par4, par2, par3, par4);
-    		par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, this.tickRate());
-    	}
-    }
     public int colorMultiplier(IBlockAccess iba, int i, int j, int k)
     {
     	int meta = iba.getBlockMetadata(i, j, k);
     	if (meta == 1) return 8388608;
     	else return 16777215;
-    }
-    public int tickRate()
-    {
-        return 20;
-    }
-    public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
-    {
-        if (!par1World.isRemote)
-        {
-        	if (par1World.isBlockGettingPowered(par2, par3, par4) || par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
-        	{
-        		par1World.setBlockMetadataWithNotify(par2, par3, par4, 2);
-        	}
-        	else par1World.setBlockMetadataWithNotify(par2, par3, par4, 1);
-        	par1World.markBlocksDirty(par2, par3, par4, par2, par3, par4);
-        	par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, this.tickRate());
-        }
     }
     /**
      * Is this block powering the block on the specified side
