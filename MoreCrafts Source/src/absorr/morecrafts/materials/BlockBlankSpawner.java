@@ -17,7 +17,7 @@ public class BlockBlankSpawner extends Block
 	public BlockBlankSpawner(int i, int j) 
     { 
         super(i, j, Material.iron);
-        this.setCreativeTab(CreativeTabs.tabMisc);
+        this.setCreativeTab(MoreCrafts.TabMoreCraft);
     }
 	public boolean isOpaqueCube()
     {

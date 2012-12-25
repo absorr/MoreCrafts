@@ -1,5 +1,8 @@
 package absorr.morecrafts.materials;
 
+import absorr.morecrafts.base.InversionRecipes;
+import absorr.morecrafts.materials.*;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFurnace;
 import net.minecraft.block.material.Material;
@@ -13,11 +16,9 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.src.*;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.common.ISidedInventory;
-import absorr.morecrafts.base.InversionRecipes;
-import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraftforge.common.*;
 
 public class TileEntityInversion extends TileEntity implements IInventory, ISidedInventory
 {

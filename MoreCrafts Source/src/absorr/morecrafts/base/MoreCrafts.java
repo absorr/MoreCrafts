@@ -1,6 +1,6 @@
 package absorr.morecrafts.base;
 
-import ic2.api.Ic2Recipes;
+//import ic2.api.Ic2Recipes;
 
 import java.util.Random;
 
@@ -26,12 +26,14 @@ import absorr.morecrafts.materials.ItemMultiTool;
 import absorr.morecrafts.materials.MoreItems;
 import absorr.morecrafts.materials.TileEntityInversion;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 
 @Mod(modid="MoreCrafts", name="MoreCrafts", version="Build 017")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
-public class MoreCrafts extends BaseMod
+public class MoreCrafts
 {
 	@SidedProxy(clientSide = "absorr.morecrafts.base.ClientProxy", serverSide = "absorr.morecrafts.base.CommonProxy", bukkitSide = "absorr.morecrafts.base.CommonProxy")
 	public static CommonProxy proxy;
@@ -52,7 +54,10 @@ public class MoreCrafts extends BaseMod
     public static Block blankSpawner; 
     public static Block inverseFurnace;
     
-    public void load()
+    //Creates a name for the creative tab
+    public static CreativeTabs TabMoreCraft;
+    @Init
+    public void load(FMLInitializationEvent event)
     {
     	//Loads the proxies
     	proxy.addMerchantRecipies();
@@ -78,6 +83,7 @@ public class MoreCrafts extends BaseMod
   		ModLoader.registerTileEntity(TileEntityInversion.class, "Inversion Furnace");
     	String maploaded = InversionRecipes.loader();
     	EntityList.entityEggs.put(Integer.valueOf(63), new EntityEggInfo(63, 0, 9118312));
+    	TabMoreCraft = new TabMoreCraft(/**CreativeTab.getNextID()*/12, "MoreCraft");
     }
     
     private void loadMaterials()
@@ -184,7 +190,7 @@ public class MoreCrafts extends BaseMod
             ModLoader.addRecipe(new ItemStack(Block.endPortalFrame, 1), new Object[] {"LEL", "EOE", "EEE", 'E', Block.whiteStone, 'O', Block.obsidian, 'L', Block.blockLapis});
             //End Stone
             ModLoader.addRecipe(new ItemStack(Block.whiteStone, 1), new Object[] {"SCS", "CIC", "SCS", 'S', Block.sponge, 'C', Block.cobblestone, 'I', Block.blockSteel});
-            Ic2Recipes.addCompressorRecipe(new ItemStack(Block.sponge, 4), new ItemStack(Block.whiteStone));
+            //Ic2Recipes.addCompressorRecipe(new ItemStack(Block.sponge, 4), new ItemStack(Block.whiteStone));
     	}
     	//Wooden Multi-Tool
         ModLoader.addName(woodMulti, "Wooden Multi-Tool");
