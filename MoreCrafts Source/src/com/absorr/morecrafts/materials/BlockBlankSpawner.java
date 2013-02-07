@@ -24,7 +24,9 @@ public class BlockBlankSpawner extends Block
     {
         return false;
     }
-    public boolean blockActivated(World world, int x, int y, int z,EntityPlayer player)
+	
+	@Override
+    public boolean onBlockActivated(World world, int x, int y, int z,EntityPlayer player, int par6, float par7, float par8, float par9)
     {
     	int metad = world.getBlockMetadata(x, y, z);
     	if (metad == 0)

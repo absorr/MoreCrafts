@@ -39,7 +39,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
 public class MoreCrafts
 {
-	@SidedProxy(clientSide = "absorr.morecrafts.base.ClientProxy", serverSide = "absorr.morecrafts.base.CommonProxy", bukkitSide = "absorr.morecrafts.base.CommonProxy")
+	@SidedProxy(clientSide = "com.absorr.morecrafts.base.ClientProxy", serverSide = "com.absorr.morecrafts.base.CommonProxy", bukkitSide = "com.absorr.morecrafts.base.CommonProxy")
 	public static CommonProxy proxy;
 	
 	@Instance
@@ -71,7 +71,7 @@ public class MoreCrafts
     	proxy.registerRenderers();
     	
     	//Loads the Creative Tab
-    	TabMoreCraft = new TabMoreCraft(/**CreativeTab.getNextID()*/12, "MoreCraft");
+    	TabMoreCraft = new TabMoreCraft("MoreCrafts");
     	
     	//Loads the blocks and items
     	chain = new MoreItems(Config.chainID, 64, CreativeTabs.tabMisc).setItemName("chain").setIconIndex(0).setCreativeTab(TabMoreCraft);
@@ -152,10 +152,6 @@ public class MoreCrafts
     		}
             //Bottle o' Enchanting
             ModLoader.addShapelessRecipe(new ItemStack(Item.expBottle, 1), new Object[] {Item.glassBottle, Item.diamond,});
-            //New Stone Brick Thing
-            ModLoader.addRecipe(new ItemStack(Block.stoneBrick, 1, 3), new Object[]{
-                "BBB", "B0B", "BBB", 
-                'B', Block.stoneBrick});
             //Saddle
             ModLoader.addRecipe(new ItemStack(Item.saddle, 1), new Object[]{
                 "LLL", "LLL", "0I0", 
@@ -184,13 +180,9 @@ public class MoreCrafts
                 "0O0", "OEO", "OSO", 
                 'S', Block.whiteStone, 'E', new ItemStack(Item.monsterPlacer, 1, 63), 'O', Block.obsidian});
             //Mossy Cobblestone
-            ModLoader.addRecipe(new ItemStack(Block.cobblestoneMossy, 1), new Object[]{
-                "CVC", "VCV", "CVC", 
-                'V', Block.vine, 'C', Block.cobblestone});
+            InversionRecipes.addSmelting(Block.cobblestoneMossy.blockID, new ItemStack(Block.cobblestone));
             //Mossy Stone Brick
-            ModLoader.addRecipe(new ItemStack(Block.cobblestoneMossy, 1), new Object[]{
-                "CVC", "VCV", "CVC", 
-                'V', Block.vine, 'C', Block.stoneBrick});
+            //TODO: Add Inversion Furnace recipe for this
             //Ice
             ModLoader.addShapelessRecipe(new ItemStack(Block.ice, 1), new Object[] {Item.bucketWater, Block.blockSnow});
             //Blank Spawn Egg

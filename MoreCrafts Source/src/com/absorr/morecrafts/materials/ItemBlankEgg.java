@@ -59,7 +59,7 @@ public class ItemBlankEgg extends Item
             	player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
         	else
         		--player.inventory.getCurrentItem().stackSize;
-        	entity.dropItemWithOffset(Item.monsterPlacer.shiftedIndex, 1, id);
+        	entity.entityDropItem(new ItemStack(Item.monsterPlacer, 1, id), 1);
         	entity.setDead();
         	return true;
         }

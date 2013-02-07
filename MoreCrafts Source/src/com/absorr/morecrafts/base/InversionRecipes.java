@@ -46,6 +46,8 @@ public class InversionRecipes
 	public ItemStack getInversionResult(ItemStack i)
 	{
 		Object inversed = InversionRecipes.smelting().getSmeltingList().get(i.itemID);
+		if (inversed == null)
+				return null;
 		Integer inv = new Integer(inversed.toString());
 		return new ItemStack(inv, 1, 0);
 	}

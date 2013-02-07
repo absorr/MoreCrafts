@@ -5,7 +5,6 @@ import com.absorr.morecrafts.materials.*;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFurnace;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -272,7 +271,6 @@ public class TileEntityInversion extends TileEntity implements IInventory, ISide
             if (var1 != this.invFurnaceBurnTime > 0)
             {
                 var2 = true;
-                BlockFurnace.updateFurnaceBlockState(this.invFurnaceBurnTime > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
             }
         }
 
