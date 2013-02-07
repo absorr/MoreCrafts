@@ -1,7 +1,8 @@
-package absorr.morecrafts.materials;
+package com.absorr.morecrafts.materials;
+import com.absorr.morecrafts.base.CommonProxy;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import absorr.morecrafts.base.CommonProxy;
 
 public class MoreItems extends Item
 {

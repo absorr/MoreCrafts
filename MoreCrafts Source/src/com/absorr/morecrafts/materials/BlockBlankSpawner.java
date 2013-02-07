@@ -1,5 +1,7 @@
-package absorr.morecrafts.materials;
+package com.absorr.morecrafts.materials;
 import java.util.ArrayList;
+
+import com.absorr.morecrafts.base.MoreCrafts;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -11,7 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import absorr.morecrafts.base.MoreCrafts;
 public class BlockBlankSpawner extends Block
 {
 	public BlockBlankSpawner(int i, int j) 

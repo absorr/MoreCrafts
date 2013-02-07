@@ -1,4 +1,6 @@
-package absorr.morecrafts.materials;
+package com.absorr.morecrafts.ui;
+
+import com.absorr.morecrafts.materials.TileEntityInversion;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

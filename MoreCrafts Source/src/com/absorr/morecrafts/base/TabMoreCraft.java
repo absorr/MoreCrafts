@@ -1,4 +1,4 @@
-package absorr.morecrafts.base;
+package com.absorr.morecrafts.base;
 
 import net.minecraft.creativetab.CreativeTabs;
 import cpw.mods.fml.relauncher.Side;
@@ -17,6 +17,6 @@ public class TabMoreCraft extends CreativeTabs {
 
 	public String getTranslatedTabLabel()
 	{
-		return "MoreCraft";
+		return "MoreCrafts";
 	}
 }

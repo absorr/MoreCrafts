@@ -1,8 +1,17 @@
-package absorr.morecrafts.base;
+package com.absorr.morecrafts.base;
 
 //import ic2.api.Ic2Recipes;
 
 import java.util.Random;
+
+import com.absorr.morecrafts.materials.BlockBlankSpawner;
+import com.absorr.morecrafts.materials.BlockInversionFurnace;
+import com.absorr.morecrafts.materials.ItemAdvPlacer;
+import com.absorr.morecrafts.materials.ItemBlankEgg;
+import com.absorr.morecrafts.materials.ItemMultiTool;
+import com.absorr.morecrafts.materials.MoreItems;
+import com.absorr.morecrafts.materials.TileEntityInversion;
+import com.absorr.morecrafts.ui.GuiHandler;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -18,18 +27,13 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenOcean;
 import net.minecraft.world.biome.BiomeGenRiver;
 import net.minecraftforge.common.DungeonHooks;
-import absorr.morecrafts.materials.BlockBlankSpawner;
-import absorr.morecrafts.materials.BlockInversionFurnace;
-import absorr.morecrafts.materials.ItemAdvPlacer;
-import absorr.morecrafts.materials.ItemBlankEgg;
-import absorr.morecrafts.materials.ItemMultiTool;
-import absorr.morecrafts.materials.MoreItems;
-import absorr.morecrafts.materials.TileEntityInversion;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
+import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.network.NetworkRegistry;
 
 @Mod(modid="MoreCrafts", name="MoreCrafts", version="Build 017")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
@@ -37,6 +41,9 @@ public class MoreCrafts
 {
 	@SidedProxy(clientSide = "absorr.morecrafts.base.ClientProxy", serverSide = "absorr.morecrafts.base.CommonProxy", bukkitSide = "absorr.morecrafts.base.CommonProxy")
 	public static CommonProxy proxy;
+	
+	@Instance
+	public static MoreCrafts instance;
 	
     static boolean vanRecipes = true;
     static boolean rechargeRs = true;
@@ -63,27 +70,30 @@ public class MoreCrafts
     	proxy.addMerchantRecipies();
     	proxy.registerRenderers();
     	
+    	//Loads the Creative Tab
+    	TabMoreCraft = new TabMoreCraft(/**CreativeTab.getNextID()*/12, "MoreCraft");
+    	
     	//Loads the blocks and items
-    	chain = new MoreItems(Config.chainID, 64, CreativeTabs.tabMisc).setItemName("chain").setIconIndex(0);
-    	blankEgg = new ItemBlankEgg(Config.eggID).setItemName("blankEgg").setIconIndex(Item.monsterPlacer.getIconIndex(new ItemStack(Item.monsterPlacer)));
-    	woodMulti = new ItemMultiTool(Config.woodMultiID, 1, EnumToolMaterial.WOOD).setItemName("woodenMultitool").setIconIndex(11);
-    	woodMulti = new ItemMultiTool(Config.woodMultiID, 1, EnumToolMaterial.WOOD).setItemName("woodenMultitool").setIconIndex(11);
-        stoneMulti = new ItemMultiTool(Config.stoneMultiID, 1, EnumToolMaterial.STONE).setItemName("stoneMultitool").setIconIndex(10);
-        ironMulti = new ItemMultiTool(Config.ironMultiID, 1, EnumToolMaterial.IRON).setItemName("ironMultitool").setIconIndex(9);
-        goldMulti = new ItemMultiTool(Config.goldMultiID, 1, EnumToolMaterial.GOLD).setItemName("goldMultitool").setIconIndex(12);
-        diamondMulti = new ItemMultiTool(Config.diamondMultiID, 1, EnumToolMaterial.EMERALD).setItemName("diamondMultitool").setIconIndex(13);
-        advSpawnEgg = new ItemAdvPlacer(Config.advSpawnID).setItemName("advancedEgg").setIconIndex(Item.monsterPlacer.getIconIndex(new ItemStack(Item.monsterPlacer)));
-        blankSpawner = new BlockBlankSpawner(Config.spawnerID, 65).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Empty Monster Spawner"); 
-        inverseFurnace = new BlockInversionFurnace(Config.furnaceID, 0).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Inversion Furnace");
+    	chain = new MoreItems(Config.chainID, 64, CreativeTabs.tabMisc).setItemName("chain").setIconIndex(0).setCreativeTab(TabMoreCraft);
+    	blankEgg = new ItemBlankEgg(Config.eggID).setItemName("blankEgg").setIconIndex(Item.monsterPlacer.getIconIndex(new ItemStack(Item.monsterPlacer))).setCreativeTab(TabMoreCraft);
+    	woodMulti = new ItemMultiTool(Config.woodMultiID, 1, EnumToolMaterial.WOOD).setItemName("woodenMultitool").setIconIndex(11).setCreativeTab(TabMoreCraft);
+    	woodMulti = new ItemMultiTool(Config.woodMultiID, 1, EnumToolMaterial.WOOD).setItemName("woodenMultitool").setIconIndex(11).setCreativeTab(TabMoreCraft);
+        stoneMulti = new ItemMultiTool(Config.stoneMultiID, 1, EnumToolMaterial.STONE).setItemName("stoneMultitool").setIconIndex(10).setCreativeTab(TabMoreCraft);
+        ironMulti = new ItemMultiTool(Config.ironMultiID, 1, EnumToolMaterial.IRON).setItemName("ironMultitool").setIconIndex(9).setCreativeTab(TabMoreCraft);
+        goldMulti = new ItemMultiTool(Config.goldMultiID, 1, EnumToolMaterial.GOLD).setItemName("goldMultitool").setIconIndex(12).setCreativeTab(TabMoreCraft);
+        diamondMulti = new ItemMultiTool(Config.diamondMultiID, 1, EnumToolMaterial.EMERALD).setItemName("diamondMultitool").setIconIndex(13).setCreativeTab(TabMoreCraft);
+        advSpawnEgg = new ItemAdvPlacer(Config.advSpawnID).setItemName("advancedEgg").setIconIndex(Item.monsterPlacer.getIconIndex(new ItemStack(Item.monsterPlacer))).setCreativeTab(TabMoreCraft);
+        blankSpawner = new BlockBlankSpawner(Config.spawnerID, 65).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Empty Monster Spawner").setCreativeTab(TabMoreCraft); 
+        inverseFurnace = new BlockInversionFurnace(Config.furnaceID, 0).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Inversion Furnace").setCreativeTab(TabMoreCraft);
     	
         loadMaterials();
         
         //Other junk
+        NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
     	ItemAdvPlacer.loadDefaultIDs();
   		ModLoader.registerTileEntity(TileEntityInversion.class, "Inversion Furnace");
     	String maploaded = InversionRecipes.loader();
     	EntityList.entityEggs.put(Integer.valueOf(63), new EntityEggInfo(63, 0, 9118312));
-    	TabMoreCraft = new TabMoreCraft(/**CreativeTab.getNextID()*/12, "MoreCraft");
     }
     
     private void loadMaterials()

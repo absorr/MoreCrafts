@@ -1,4 +1,4 @@
-package absorr.morecrafts.base;
+package com.absorr.morecrafts.base;
 
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;

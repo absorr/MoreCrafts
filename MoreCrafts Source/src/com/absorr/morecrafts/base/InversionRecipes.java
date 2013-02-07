@@ -1,4 +1,4 @@
-package absorr.morecrafts.base;
+package com.absorr.morecrafts.base;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,6 @@
-package absorr.morecrafts.materials;
+package com.absorr.morecrafts.materials;
+
+import com.absorr.morecrafts.base.MoreCrafts;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -9,7 +11,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import absorr.morecrafts.base.MoreCrafts;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -54,7 +55,11 @@ public class ItemBlankEgg extends Item
         if (entity instanceof EntityLiving && MoreCrafts.eggUsable() && entity instanceof EntityPlayer == false)
         {
         	int id = EntityList.getEntityID(entity);
-        	player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Item.monsterPlacer, 1, id));
+        	if (player.inventory.getCurrentItem().stackSize == 1)
+            	player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
+        	else
+        		--player.inventory.getCurrentItem().stackSize;
+        	entity.dropItemWithOffset(Item.monsterPlacer.shiftedIndex, 1, id);
         	entity.setDead();
         	return true;
         }

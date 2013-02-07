@@ -1,7 +1,8 @@
-package absorr.morecrafts.materials;
+package com.absorr.morecrafts.materials;
 
-import absorr.morecrafts.base.InversionRecipes;
-import absorr.morecrafts.materials.*;
+import com.absorr.morecrafts.base.InversionRecipes;
+import com.absorr.morecrafts.materials.*;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFurnace;

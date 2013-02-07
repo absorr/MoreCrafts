@@ -1,4 +1,4 @@
-package absorr.morecrafts.base;
+package com.absorr.morecrafts.base;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

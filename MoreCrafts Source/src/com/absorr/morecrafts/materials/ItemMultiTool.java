@@ -1,8 +1,10 @@
-package absorr.morecrafts.materials;
+package com.absorr.morecrafts.materials;
 
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
+
+import com.absorr.morecrafts.base.CommonProxy;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -12,7 +14,6 @@ import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
-import absorr.morecrafts.base.CommonProxy;
 
 public class ItemMultiTool extends ItemTool
 {

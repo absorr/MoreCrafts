@@ -1,6 +1,11 @@
-package absorr.morecrafts.materials;
+package com.absorr.morecrafts.materials;
 
 import java.util.ArrayList;
+
+import com.absorr.morecrafts.base.CommonProxy;
+import com.absorr.morecrafts.base.MoreCrafts;
+import com.absorr.morecrafts.ui.ContainerInversion;
+import com.absorr.morecrafts.ui.GuiInversion;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -14,8 +19,6 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import absorr.morecrafts.base.CommonProxy;
-import absorr.morecrafts.base.MoreCrafts;
 
 public class BlockInversionFurnace extends BlockContainer
 {
@@ -203,14 +206,7 @@ public class BlockInversionFurnace extends BlockContainer
     	TileEntityInversion var6 = (TileEntityInversion)par1World.getBlockTileEntity(par2, par3, par4);
         if (var6 != null)
         {
-        	if(par5EntityPlayer instanceof EntityPlayerMP)
-            {
-        		ModLoader.serverOpenWindow((EntityPlayerMP)par5EntityPlayer, new ContainerInversion(par5EntityPlayer.inventory,var6), 0, par2, par3, par4);
-            }
-            else
-            {
-            	ModLoader.openGUI(par5EntityPlayer, new GuiInversion(par5EntityPlayer.inventory, var6));
-            }
+        	par5EntityPlayer.openGui(MoreCrafts.instance, 0, par1World, par2, par3, par4);
         }
 
         return true;

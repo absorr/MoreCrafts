@@ -1,4 +1,6 @@
-package absorr.morecrafts.materials;
+package com.absorr.morecrafts.materials;
+
+import com.absorr.morecrafts.base.MoreCrafts;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -12,7 +14,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import absorr.morecrafts.base.MoreCrafts;
 
 public class EntityBlankEgg extends EntityThrowable
 {

@@ -1,4 +1,4 @@
-package absorr.morecrafts.materials;
+package com.absorr.morecrafts.materials;
 
 import java.util.HashMap;
 import java.util.List;
