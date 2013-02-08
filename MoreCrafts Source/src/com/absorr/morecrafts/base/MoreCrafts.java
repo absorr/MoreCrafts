@@ -35,7 +35,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 
-@Mod(modid="MoreCrafts", name="MoreCrafts", version="Build 017")
+@Mod(modid="MoreCrafts", name="MoreCrafts", version="1.4")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
 public class MoreCrafts
 {
@@ -276,6 +276,6 @@ public class MoreCrafts
     }
     public String getVersion()
     {
-        return "Build 017";
+        return "1.4.0.020";
     }
 }
