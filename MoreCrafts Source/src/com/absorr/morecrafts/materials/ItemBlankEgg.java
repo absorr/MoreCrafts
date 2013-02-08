@@ -55,10 +55,13 @@ public class ItemBlankEgg extends Item
         if (entity instanceof EntityLiving && MoreCrafts.eggUsable() && entity instanceof EntityPlayer == false)
         {
         	int id = EntityList.getEntityID(entity);
-        	if (player.inventory.getCurrentItem().stackSize == 1)
-            	player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
-        	else
-        		--player.inventory.getCurrentItem().stackSize;
+        	if(!player.capabilities.isCreativeMode)
+        	{
+	        	if (player.inventory.getCurrentItem().stackSize == 1)
+	            	player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
+	        	else
+	        		--player.inventory.getCurrentItem().stackSize;
+        	}
         	entity.entityDropItem(new ItemStack(Item.monsterPlacer, 1, id), 1);
         	entity.setDead();
         	return true;

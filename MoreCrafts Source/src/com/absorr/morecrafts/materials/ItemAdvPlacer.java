@@ -159,8 +159,9 @@ public class ItemAdvPlacer extends Item
     	addAdvID(31, 98); //Tamed Ocelot
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
-    public int func_82790_a(ItemStack par1ItemStack, int par2)
+    public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
     {
         EntityEggInfo var3 = (EntityEggInfo)EntityList.entityEggs.get(getEntityID(par1ItemStack.getItemDamage()));
         return var3 != null ? (par2 == 0 ? var3.primaryColor : var3.secondaryColor) : 16777215;
