@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityEggInfo;
@@ -18,6 +19,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Facing;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -25,6 +27,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemAdvPlacer extends Item
 {
 	private static Map advToEnt = new HashMap();
+	private Icon field_94593_a;
 	
     public ItemAdvPlacer(int par1)
     {
@@ -278,14 +281,18 @@ public class ItemAdvPlacer extends Item
         return true;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
-
-    /**
-     * Gets an icon index based on an item's damage value and the given render pass
-     */
-    public int getIconFromDamageForRenderPass(int par1, int par2)
+    public Icon getIconFromDamageForRenderPass(int par1, int par2)
     {
-        return par2 > 0 ? super.getIconFromDamageForRenderPass(par1, par2) + 16 : super.getIconFromDamageForRenderPass(par1, par2);
+        return par2 > 0 ? this.field_94593_a : super.getIconFromDamageForRenderPass(par1, par2);
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public void func_94581_a(IconRegister par1IconRegister)
+    {
+        super.func_94581_a(par1IconRegister);
+        this.field_94593_a = par1IconRegister.func_94245_a("monsterPlacer_overlay");
     }
     
     @SideOnly(Side.CLIENT)

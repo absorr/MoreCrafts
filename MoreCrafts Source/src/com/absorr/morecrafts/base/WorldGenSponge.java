@@ -47,7 +47,7 @@ public class WorldGenSponge extends WorldGenerator
 
                             if (var13 == Block.dirt.blockID || var13 == Block.sponge.blockID || var13 == Block.blockClay.blockID || var13 == Block.sand.blockID)
                             {
-                                par1World.setBlock(var8, var12, var9, this.spoungeBlockId);
+                                par1World.setBlockAndMetadataWithNotify(var8, var12, var9, this.spoungeBlockId, 0, 1);
                             }
                         }
                     }

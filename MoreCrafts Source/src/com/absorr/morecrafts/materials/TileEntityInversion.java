@@ -18,6 +18,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.src.*;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.common.*;
 
 public class TileEntityInversion extends TileEntity implements IInventory, ISidedInventory
@@ -333,39 +334,7 @@ public class TileEntityInversion extends TileEntity implements IInventory, ISide
      */
     public static int getItemBurnTime(ItemStack par0ItemStack)
     {
-        if (par0ItemStack == null)
-        {
-            return 0;
-        }
-        else
-        {
-            int var1 = par0ItemStack.getItem().shiftedIndex;
-            Item var2 = par0ItemStack.getItem();
-
-            if (par0ItemStack.getItem() instanceof ItemBlock && Block.blocksList[var1] != null)
-            {
-                Block var3 = Block.blocksList[var1];
-
-                if (var3 == Block.woodSingleSlab)
-                {
-                    return 150;
-                }
-
-                if (var3.blockMaterial == Material.wood)
-                {
-                    return 300;
-                }
-            }
-            if (var2 instanceof ItemTool && ((ItemTool) var2).getToolMaterialName().equals("WOOD")) return 200;
-            if (var2 instanceof ItemSword && ((ItemSword) var2).func_77825_f().equals("WOOD")) return 200;
-            if (var2 instanceof ItemHoe && ((ItemHoe) var2).func_77842_f().equals("WOOD")) return 200;
-            if (var1 == Item.stick.shiftedIndex) return 100;
-            if (var1 == Item.coal.shiftedIndex) return 1600;
-            if (var1 == Item.bucketLava.shiftedIndex) return 20000;
-            if (var1 == Block.sapling.blockID) return 100;
-            if (var1 == Item.blazeRod.shiftedIndex) return 2400;
-            return GameRegistry.getFuelValue(par0ItemStack);
-        }
+        return TileEntityFurnace.getItemBurnTime(par0ItemStack);
     }
 
     /**
@@ -401,4 +370,16 @@ public class TileEntityInversion extends TileEntity implements IInventory, ISide
     {
         return 1;
     }
+
+	@Override
+	public boolean func_94042_c() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean func_94041_b(int i, ItemStack itemstack) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

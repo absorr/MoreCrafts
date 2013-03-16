@@ -15,8 +15,7 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void registerRenderers() 
 	{
-		MinecraftForgeClient.preloadTexture(itemPic); 
-    	MinecraftForgeClient.preloadTexture(blockPic);
+
 	}
 	@Override
 	public void addMerchantRecipies()

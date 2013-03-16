@@ -4,7 +4,6 @@ package com.absorr.morecrafts.base;
 
 import java.util.Random;
 
-import com.absorr.morecrafts.materials.BlockBlankSpawner;
 import com.absorr.morecrafts.materials.BlockInversionFurnace;
 import com.absorr.morecrafts.materials.ItemAdvPlacer;
 import com.absorr.morecrafts.materials.ItemBlankEgg;
@@ -35,7 +34,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 
-@Mod(modid="MoreCrafts", name="MoreCrafts", version="1.4")
+@Mod(modid="MoreCrafts", name="MoreCrafts", version="Build 021")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
 public class MoreCrafts
 {
@@ -74,17 +73,16 @@ public class MoreCrafts
     	TabMoreCraft = new TabMoreCraft("MoreCrafts");
     	
     	//Loads the blocks and items
-    	chain = new MoreItems(Config.chainID, 64, CreativeTabs.tabMisc).setItemName("chain").setIconIndex(0).setCreativeTab(TabMoreCraft);
-    	blankEgg = new ItemBlankEgg(Config.eggID).setItemName("blankEgg").setIconIndex(Item.monsterPlacer.getIconIndex(new ItemStack(Item.monsterPlacer))).setCreativeTab(TabMoreCraft);
-    	woodMulti = new ItemMultiTool(Config.woodMultiID, 1, EnumToolMaterial.WOOD).setItemName("woodenMultitool").setIconIndex(11).setCreativeTab(TabMoreCraft);
-    	woodMulti = new ItemMultiTool(Config.woodMultiID, 1, EnumToolMaterial.WOOD).setItemName("woodenMultitool").setIconIndex(11).setCreativeTab(TabMoreCraft);
-        stoneMulti = new ItemMultiTool(Config.stoneMultiID, 1, EnumToolMaterial.STONE).setItemName("stoneMultitool").setIconIndex(10).setCreativeTab(TabMoreCraft);
-        ironMulti = new ItemMultiTool(Config.ironMultiID, 1, EnumToolMaterial.IRON).setItemName("ironMultitool").setIconIndex(9).setCreativeTab(TabMoreCraft);
-        goldMulti = new ItemMultiTool(Config.goldMultiID, 1, EnumToolMaterial.GOLD).setItemName("goldMultitool").setIconIndex(12).setCreativeTab(TabMoreCraft);
-        diamondMulti = new ItemMultiTool(Config.diamondMultiID, 1, EnumToolMaterial.EMERALD).setItemName("diamondMultitool").setIconIndex(13).setCreativeTab(TabMoreCraft);
-        advSpawnEgg = new ItemAdvPlacer(Config.advSpawnID).setItemName("advancedEgg").setIconIndex(Item.monsterPlacer.getIconIndex(new ItemStack(Item.monsterPlacer))).setCreativeTab(TabMoreCraft);
-        blankSpawner = new BlockBlankSpawner(Config.spawnerID, 65).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Empty Monster Spawner").setCreativeTab(TabMoreCraft); 
-        inverseFurnace = new BlockInversionFurnace(Config.furnaceID, 0).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setBlockName("Inversion Furnace").setCreativeTab(TabMoreCraft);
+    	chain = new MoreItems(Config.chainID, 64, "chain").setUnlocalizedName("chain").setCreativeTab(TabMoreCraft);
+    	blankEgg = new ItemBlankEgg(Config.eggID).setUnlocalizedName("blankEgg").setCreativeTab(TabMoreCraft);
+    	woodMulti = new ItemMultiTool(Config.woodMultiID, 1, EnumToolMaterial.WOOD).setUnlocalizedName("woodenMultitool").setCreativeTab(TabMoreCraft);
+    	woodMulti = new ItemMultiTool(Config.woodMultiID, 1, EnumToolMaterial.WOOD).setUnlocalizedName("woodenMultitool").setCreativeTab(TabMoreCraft);
+        stoneMulti = new ItemMultiTool(Config.stoneMultiID, 1, EnumToolMaterial.STONE).setUnlocalizedName("stoneMultitool").setCreativeTab(TabMoreCraft);
+        ironMulti = new ItemMultiTool(Config.ironMultiID, 1, EnumToolMaterial.IRON).setUnlocalizedName("ironMultitool").setCreativeTab(TabMoreCraft);
+        goldMulti = new ItemMultiTool(Config.goldMultiID, 1, EnumToolMaterial.GOLD).setUnlocalizedName("goldMultitool").setCreativeTab(TabMoreCraft);
+        diamondMulti = new ItemMultiTool(Config.diamondMultiID, 1, EnumToolMaterial.EMERALD).setUnlocalizedName("diamondMultitool").setCreativeTab(TabMoreCraft);
+        advSpawnEgg = new ItemAdvPlacer(Config.advSpawnID).setUnlocalizedName("advancedEgg").setCreativeTab(TabMoreCraft); 
+        inverseFurnace = new BlockInversionFurnace(Config.furnaceID).setHardness(1.0F).setResistance(6000.0F).setLightValue(0.0F).setUnlocalizedName("Inversion Furnace").setCreativeTab(TabMoreCraft);
     	
         loadMaterials();
         
@@ -212,21 +210,11 @@ public class MoreCrafts
         
         //Other stuff
         if (otherStuff){
-        	//Empty Monster Spawner
-            ModLoader.registerBlock(blankSpawner); 
-            ModLoader.addName(blankSpawner, "Empty Monster Spawner");
-            ModLoader.addRecipe(new ItemStack(blankSpawner, 1), new Object[] { 
-            "III", "IEI", "III", Character.valueOf('I'), Block.fenceIron, Character.valueOf('E'), blankEgg});
             //Inversion Furnace
             ModLoader.registerBlock(inverseFurnace); 
             ModLoader.addName(inverseFurnace, "Inversion Furnace");
-            ModLoader.addRecipe(new ItemStack(inverseFurnace, 1), new Object[] {"DED", "EFE", "DED", 'E', Block.whiteStone, 'D', Item.diamond, 'F', Block.stoneOvenIdle});
+            ModLoader.addRecipe(new ItemStack(inverseFurnace, 1), new Object[] {"DED", "EFE", "DED", 'E', Block.whiteStone, 'D', Item.diamond, 'F', Block.furnaceIdle});
         }
-        //Adds Items to Dungeon Loot
-        DungeonHooks.addDungeonLoot(new ItemStack(chain), 1, 1, 8);
-        DungeonHooks.addDungeonLoot(new ItemStack(woodMulti), (int) 0.65, 1, 8);
-        DungeonHooks.addDungeonLoot(new ItemStack(blankEgg), (int) 0.1, 1, 8);
-        DungeonHooks.addDungeonLoot(new ItemStack(Block.sponge), (int) 3.6, 1, 8);
     }
     
     public static void propCheck()
@@ -276,6 +264,6 @@ public class MoreCrafts
     }
     public String getVersion()
     {
-        return "1.4.0.020";
+        return "1.4.0.021";
     }
 }

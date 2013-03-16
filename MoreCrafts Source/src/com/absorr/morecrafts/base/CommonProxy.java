@@ -7,8 +7,6 @@ import net.minecraft.village.MerchantRecipeList;
 
 public class CommonProxy
 {
-	public static String itemPic = "/absorr/morecrafts/items.png";
-	public static String blockPic = "/absorr/morecrafts/blocks.png";
 	
 	/*
 	 * Creates more villager trading recipes
